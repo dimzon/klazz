@@ -1,0 +1,55 @@
+//Let's create a class
+klazz("Some.Namespace.ClassName", {
+	ctor: function(){
+	// Constructor logic here
+	},
+	foo: function(){
+		//
+		return("do something");
+	}
+});
+
+//Let's create another class
+klazz("ClassName2", {
+	ctor: function(){
+	// Constructor logic here
+	},
+	foo: function(){
+		//
+		return("do something");
+	}
+});
+
+//Let's create yet another class
+var ClassName3=klazz({
+	ctor: function(){
+	// Constructor logic here
+	},
+	foo: function(){
+		//
+		return("do something");
+	}
+});
+//Let's inherit
+klazz("Some.Namespace.Child1",Some.Namespace.ClassName,{
+	foo:function(){
+		return this.$superClass.prototype.foo() + "\n override 1";
+	};
+});
+
+
+//Let's patch base class
+Some.Namespace.ClassName.prototype.bar=function(){return "bar";};
+
+//Let's override in child
+Some.Namespace.Child1.$$override("bar", function(){
+		return this.$superClass.prototype.bar() + "\n override 1";
+	});
+
+//Let's REPLACE foo in child1
+Some.Namespace.Child1.$$replace("foo", function(previousImplementation){
+		return previousImplementation() + "\n replace 1";
+	});
+
+ 
+
